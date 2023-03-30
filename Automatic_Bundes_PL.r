@@ -4,11 +4,9 @@ library(tidyverse)
 library(ggsoccer)
 library(extrafont)
 library(showtext)
-loadfonts(device = "win", quiet = TRUE) 
+loadfonts(device = "win", quiet = TRUE)
 
-devtools::install_github("JaseZiv/worldfootballR")
-
-fotmob_get_matches_by_date(20230317)
+#game id
 ID <- fotmob_get_matches_by_date(20230319) %>%
   filter(primary_id==38) %>%
   select(match_id) 
@@ -167,35 +165,28 @@ DeLuciatoR::ggsave_fitmax(path="BundesReport", filename = "3AwaySM.png", maxheig
 
 #flowchart data organising
 flow_H <- Home_Shots %>%
-  mutate(flow = cumsum(expected_goals)) %>%
+  mutate(flow = cumsum(expected_goals),
+         team = match_det$home_team[1]) %>%
   select(min,player_name,event_type,expected_goals,flow,team_id)
 flow_H$team <- match_det$home_team[1]
-H_r <- c(0,"none","none",0,0,match_det$home_team_id[1],match_det$home_team[1])
-flow_H <- rbind(flow_H,H_r)
-flow_H <- rbind(flow_H,H_r)
-flow_H$min <- as.numeric(flow_H$min)
-flow_H$expected_goals <- as.numeric(flow_H$expected_goals)
-flow_H$flow <- as.numeric(flow_H$flow)
-H_r <- c(92,"none","none",0,sum(flow_H$expected_goals),match_det$home_team_id[1],match_det$home_team[1])
-flow_H <- rbind(flow_H,H_r)
+H_r0 <- c(0,"none","none",0,0,match_det$home_team_id[1],match_det$home_team[1])
+H_r1 <- c(92,"none","none",0,sum(flow_H$expected_goals),match_det$home_team_id[1],match_det$home_team[1])
+flow_H <- rbind(flow_H,H_r0,H_r1)
 flow_H$min <- as.numeric(flow_H$min)
 flow_H$expected_goals <- as.numeric(flow_H$expected_goals)
 flow_H$flow <- as.numeric(flow_H$flow)
 
 flow_A <- Away_Shots %>%
-  mutate(flow = cumsum(expected_goals)) %>%
+  mutate(flow = cumsum(expected_goals),
+         team = match_det$away_team[1]) %>%
   select(min,player_name,event_type,expected_goals,flow,team_id)
-flow_A$team <- match_det$away_team[1]
-A_r <- c(0,"none","none",0,0,match_det$away_team_id[1],match_det$away_team[1])
-flow_A <- rbind(flow_A,A_r)
+A_r0 <- c(0,"none","none",0,0,match_det$away_team_id[1],match_det$away_team[1])
+A_r1 <- c(92,"none","none",0,sum(flow_A$expected_goals),match_det$away_team_id[1],match_det$away_team[1])
+flow_A <- rbind(flow_A,A_r0,A_r1)
 flow_A$min <- as.numeric(flow_A$min)
 flow_A$expected_goals <- as.numeric(flow_A$expected_goals)
 flow_A$flow <- as.numeric(flow_A$flow)
-A_r <- c(92,"none","none",0,sum(flow_A$expected_goals),match_det$away_team_id[1],match_det$away_team[1])
-flow_A <- rbind(flow_A,A_r)
-flow_A$min <- as.numeric(flow_A$min)
-flow_A$expected_goals <- as.numeric(flow_A$expected_goals)
-flow_A$flow <- as.numeric(flow_A$flow)
+
 
 #flowchart graph
 ggplot() +
