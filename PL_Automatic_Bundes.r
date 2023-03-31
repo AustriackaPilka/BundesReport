@@ -7,13 +7,13 @@ library(showtext)
 loadfonts(device = "win", quiet = TRUE)
 
 #game id
-ID <- fotmob_get_matches_by_date(20230319) %>%
+ID <- fotmob_get_matches_by_date(20230331) %>%
   filter(primary_id==38) %>%
   select(match_id) 
 
 # i is a number that represents which game's ID from a given day you want
 ID <- as.numeric(ID$match_id)
-ID <- ID[i]
+ID <- ID[1]
 
 #teams color, name and id
 
@@ -164,7 +164,7 @@ DeLuciatoR::ggsave_fitmax(path="BundesReport", filename = "3AwaySM.png", maxheig
                           maxwidth = 15)
 
 
-#flowchart data organising
+#flowchart data organizing
 flow_H <- Home_Shots %>%
   mutate(flow = cumsum(expected_goals),
          team = match_det$home_team[1]) %>%
