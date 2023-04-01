@@ -13,7 +13,7 @@ ID <- fotmob_get_matches_by_date(20230331) %>%
 
 # i is a number that represents which game's ID from a given day you want
 ID <- as.numeric(ID$match_id)
-ID <- ID[1]
+ID <- ID[i]
 
 #teams color, name and id
 
