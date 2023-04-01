@@ -1,6 +1,5 @@
-# Welcome to GitHub Desktop!
+# BundesReport
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
+This is a script that I use for #BundesReport content on my [Twitter profile](https://twitter.com/AustriackaPilka)
 
-Write your name on line 6, save it, and then head back to GitHub Desktop.
-#Mieszko Pugowski
+If you have any comments, feel fre to DM me
