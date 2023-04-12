@@ -106,7 +106,7 @@ ggplot(Home_Shots) +
   annotate_pitch(dimensions = pitch_international, colour="black",
                  fill="#2B734C",
                  limits=F) +
-  geom_point(Home_Shots, mapping = aes(x = x-5, y = y,
+  geom_point(Home_Shots, mapping = aes(x = x-5, y = y,    # subtracting 5 to put FotMob data correctly on ggsoccer pitch
                                        color = expected_goals,
                                        shape = factor(event_type),
                                        size=7)) +
