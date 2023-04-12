@@ -7,7 +7,7 @@ library(showtext)
 loadfonts(device = "win", quiet = TRUE)
 
 #game id
-ID <- fotmob_get_matches_by_date(20230331) %>%
+ID <- fotmob_get_matches_by_date(y-mm-dd) %>%
   filter(primary_id==38) %>%
   select(match_id) 
 
